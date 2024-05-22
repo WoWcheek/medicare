@@ -1,25 +1,30 @@
 :root {
-   --main-color: #7f00ff;
-   --bg-color: #f3ccf3;
-   --main-text-color: #390339;
+    --main-color: #3e36b0;
+    --bg-color: #fff;
+    --dark-bg-color: #f9fafb;
+    --main-text-color: #414a4f;
 }
 
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   font-family: Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .MuiButton-contained {
-   background-color: var(--main-color) !important;
+    background-color: var(--main-color) !important;
 }
 
 .MuiButton-outlined {
-   color: var(--main-color) !important;
-   border-color: var(--main-color) !important;
+    color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
 }
 
 .MuiInput-root::after {
-   border-bottom-color: var(--main-color) !important;
+    border-bottom-color: var(--main-color) !important;
+}
+
+button:has(svg) {
+    line-height: 0;
 }

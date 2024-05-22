@@ -1,125 +1,125 @@
 main {
-   display: flex;
-   justify-content: space-between;
-   height: 100vh;
-   width: 100%;
-   background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--bg-color);
 }
 
 main > div {
-   height: 100%;
-   width: 50%;
+    height: 100%;
+    width: 50%;
 }
 
 .half-y-div {
-   height: 45%;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .half-y-div:first-child {
-   justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 .half-y-div:last-child {
-   justify-content: flex-start;
+    justify-content: flex-start;
 }
 
 .image-container {
-   border-radius: 65% 35% 100% 0% / 0% 100% 0% 100%;
-   border-right: 1.1rem solid var(--main-color);
-   background-image: url("../../assets/images/couple.jpg");
-   background-size: cover;
-   background-repeat: no-repeat;
-   overflow: hidden;
+    border-radius: 65% 35% 100% 0% / 0% 100% 0% 100%;
+    border-right: 1.1rem solid var(--main-color);
+    background-image: url("../../assets/images/sign-up-photo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .image-container::before {
-   content: "";
-   display: block;
-   width: 100%;
-   height: 100%;
-   background-color: var(--main-color);
-   opacity: 0.2;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    opacity: 0.2;
 }
 
 .form-container {
-   position: relative;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo-container {
-   margin-bottom: clamp(0.7rem, 2%, 1.3rem);
+    margin-bottom: clamp(0.7rem, 2%, 1.3rem);
 }
 
 .form-container label {
-   color: rgba(0, 0, 0, 0.6) !important;
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .btns-container {
-   width: 280px;
-   display: flex;
-   justify-content: space-between;
-   margin: 1.35rem 0 3rem 0;
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+    margin: 1.35rem 0 3rem 0;
 }
 
 .btns-container > div.link-container,
 .btns-container > button {
-   width: 43%;
+    width: 43%;
 }
 
 .btns-container > div.link-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 1rem;
-   letter-spacing: 1.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
 }
 
 div.link-container > a {
-   cursor: pointer;
-   color: var(--main-color);
+    cursor: pointer;
+    color: var(--main-color);
 
-   user-select: none;
-   -moz-user-select: none;
-   -webkit-user-select: none;
-   -ms-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 div.line-through-text {
-   position: relative;
-   height: 30px;
-   width: 280px;
-   display: flex;
-   justify-content: center;
+    position: relative;
+    height: 30px;
+    width: 280px;
+    display: flex;
+    justify-content: center;
 }
 
 div.line-through-text > hr {
-   box-sizing: content-box;
-   height: 0;
-   width: 100%;
-   border: 1.2px solid var(--main-color);
-   opacity: 0.69;
+    box-sizing: content-box;
+    height: 0;
+    width: 100%;
+    border: 1.2px solid var(--main-color);
+    opacity: 0.69;
 }
 
 div.line-through-text > h5 {
-   width: 2.6rem;
-   background-color: var(--bg-color);
-   color: var(--main-color);
-   font-size: 0.9rem;
-   text-transform: uppercase;
-   text-align: center;
-   position: absolute;
-   top: calc(-50% + 0.55rem);
+    width: 2.6rem;
+    background-color: var(--bg-color);
+    color: var(--main-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    top: calc(25%);
 }
 
 p.copyright {
-   font-size: clamp(1rem, 0.9vw, 2rem);
-   position: absolute;
-   bottom: 2rem;
-   color: var(--main-color);
+    font-size: clamp(1rem, 0.9vw, 2rem);
+    position: absolute;
+    bottom: 2rem;
+    color: var(--main-color);
 }
