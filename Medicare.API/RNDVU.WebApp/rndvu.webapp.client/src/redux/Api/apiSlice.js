@@ -103,10 +103,28 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 }
             }),
             extraOptions: { }
-        })        
+        }),
+        getDoctors: builder.mutation({
+            query: (creds) => ({
+                url: '/auth/GetDoctors',
+                method: 'POST',
+                body: {
+                    ...creds
+                }
+            }),
+            extraOptions: { }
+        }),
+        getDoctor: builder.mutation({
+            query: (creds) => ({
+                url: '/auth/GetDoctors?id='+creds,
+                method: 'GET',
+            }),
+            extraOptions: { }
+        })                
     })
 });
 
 
 export const { useLoginMutation, useRegisterMutation, useGetUserMutation,
-    useGetInfoMutation, useSetAvatarMutation, useChangePasswordMutation, useEditProfileMutation } = authApiSlice;
+    useGetInfoMutation, useSetAvatarMutation,
+     useChangePasswordMutation, useEditProfileMutation, useGetDoctorMutation, useGetDoctorsMutation } = authApiSlice;

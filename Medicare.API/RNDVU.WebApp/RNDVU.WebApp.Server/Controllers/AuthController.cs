@@ -30,20 +30,61 @@ namespace Medicare.WebApp.Server.Controllers
         }
 
         [Authorize]
+   
         public async Task<IActionResult> GetUser()
         {
-            var user = _context.Users.Include(x=>x.UserSpecializations).FirstOrDefault(x=>x.Email == User.Identity.Name);
+            var user = _context.Users.Include(x => x.UserSpecializations).FirstOrDefault(x => x.Email == User.Identity.Name);
 
-            return Ok(new {
-                user.Id, 
-                user.IsPatient, 
+            return Ok(new
+            {
+                user.Id,
+                user.IsPatient,
                 user.FullName,
                 user.Description,
-                user.Avatar, 
-                user.Email, 
+                user.Avatar,
+                user.Email,
                 user.PhoneNumber,
                 token = HttpContext.GetTokenAsync("access_token"),
-                specializations = user.UserSpecializations?.Select(x=>x.SpecializationId).ToList()
+                specializations = user.UserSpecializations?.Select(x => x.SpecializationId).ToList()
+            });
+        }
+        [Authorize]
+        public async Task<IActionResult> GetDoctors([FromBody] FilterModel request)
+        {
+            var users = _context.Users.Include(x => x.UserSpecializations).ThenInclude(x=>x.Specialization)
+                .Where(x => !x.IsPatient)
+                .ToList()
+                .Where(x => request.Specializations?.Any(y => x.UserSpecializations.Any(u => u.SpecializationId == y)) ?? true)
+                .Skip((request.Page ?? 0) * 9)
+                .Take(9);
+
+            return Ok(new { count = _context.Users.Include(x => x.UserSpecializations).ThenInclude(x => x.Specialization)
+                .Where(x => !x.IsPatient)
+                .ToList()
+                .Where(x => request.Specializations?.Any(y => x.UserSpecializations.Any(u => u.SpecializationId == y)) ?? true).Count(), doctors= users.Select(user => new {
+                user.Id,
+                user.FullName,
+                user.Description,
+                user.Avatar,
+                user.Email,
+                user.PhoneNumber,
+                specializations = user.UserSpecializations?.Select(x => x.Specialization.Name).ToList()
+            })});
+        }
+        [Authorize]
+        public async Task<IActionResult> GetDoctor(Guid id)
+        {
+            var user = _context.Users.Include(x => x.UserSpecializations).FirstOrDefault(x => x.Id == id);
+
+            return Ok(new
+            {
+                user.Id,
+                user.FullName,
+                user.Description,
+                user.Avatar,
+                user.Email,
+                user.PhoneNumber,
+                specializations = user.UserSpecializations?.Select(x => x.SpecializationId).ToList()
             });
         }
 
@@ -69,6 +110,7 @@ namespace Medicare.WebApp.Server.Controllers
                         Email = request.Email,
                         FullName = request.FullName,
                         UserName = request.Email,
+                        IsPatient = request.IsPatient,
                         PasswordHash = sha1data,
                     });
 
@@ -185,6 +227,7 @@ namespace Medicare.WebApp.Server.Controllers
 
             string token = string.Empty;
             Guid? id = null;
+            bool isPatient = false;
 
             try
             {
@@ -196,6 +239,7 @@ namespace Medicare.WebApp.Server.Controllers
                 {
                     return BadRequest("Wrong creds");
                 }
+
 
                 var sha1data = new PasswordHasher<User>()
                     .VerifyHashedPassword(null!, user.PasswordHash, Password);
@@ -228,26 +272,14 @@ namespace Medicare.WebApp.Server.Controllers
 
                 token = resp;
                 id = user.Id;
+                isPatient = user.IsPatient;
             }
             catch (Exception e)
             {
                 throw;
             }
 
-            return Ok(new { token, id });
-        }
-    }
-    public interface IPasswordValidator<TUser> where TUser : class
-    {
-        Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password);
-    }
-
-    public class UsernameAsPasswordValidator<TUser> : IPasswordValidator<TUser>
-        where TUser : IdentityUser<Guid>
-    {
-        public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password)
-        {
-            return Task.FromResult(IdentityResult.Success);
+            return Ok(new { token, isPatient,  id });
         }
     }
 }

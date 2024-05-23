@@ -36,7 +36,8 @@ function SignUpForm() {
                 fullName: fullnameEl.current.value,
                 isPatient: isPatient.current.checked
             }).unwrap();
-            dispatch(setUser(userData));
+        localStorage.setItem("isPatient", userData.isPatient);
+        dispatch(setUser(userData));
             asyncLocalStorage
                 .setItem("token", userData.token)
                 .then(() => history("/"));

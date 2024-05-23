@@ -31,7 +31,8 @@ function SignInForm() {
             throw new Error("Login Failed!");
          }
 
-         dispatch(setUser(userData));
+        localStorage.setItem("isPatient", userData.isPatient);
+        dispatch(setUser(userData));
          asyncLocalStorage.setItem("token", userData.token)
          .then(()=>history('/'));
 

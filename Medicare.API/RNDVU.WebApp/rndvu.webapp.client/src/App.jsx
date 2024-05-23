@@ -9,6 +9,10 @@ function App() {
         useSelector((state) => state.auth.token) ||
         localStorage.getItem("token");
 
+    const isPatient =
+        useSelector((state) => state.auth.isPatient) ||
+        localStorage.getItem("isPatient");
+        
     if (!accessToken) {
         return (
             <Routes>
@@ -19,7 +23,7 @@ function App() {
         );
     }
 
-    return <AuthorizedRoutes />;
+    return <AuthorizedRoutes isPatient={isPatient} />;
 }
 
 export default App;

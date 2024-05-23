@@ -28,9 +28,6 @@ const PersonalPage = () => {
     const catalog = useSelector((state) => state.catalog);
     const [editProfile] = useEditProfileMutation();
 
-    const [show, setShow] = useState(false);
-    const [message, setMessage] = useState("");
-    const [variant, setVariant] = useState("");
     const inputOldPasswordRef = useRef(null);
     const inputNewPasswordRef = useRef(null);
     const [selectedSpecs, setSelectedSpecs] = useState(
@@ -80,23 +77,7 @@ const PersonalPage = () => {
             });
         }
 
-        //   if (res.status === 200) {
-        //     setVariant('success');
-        //     setShow(true);
-        //     setMessage("Data changed");
-        //     refreshData();
-        //   } else {
-        //     const x = await res.json();
-        //     if (x.length > 0) {
-        //       setMessage(x[0]);
-        //       setVariant('danger');
-        //       setShow(true);
-        //     } else {
-        //       setShow(false);
-        //       refreshData();
-        //     }
-        //   }
-        // });
+    
     }, [user, selectedSpecs, userForm]);
 
     const changePass = useCallback(async () => {
@@ -121,7 +102,7 @@ const PersonalPage = () => {
 
     const logoutHandler = async (e) => {
         e.preventDefault();
-
+        localStorage.removeItem("isPatient");
         asyncLocalStorage.removeItem("token").then(() => {
             Promise.resolve()
                 .then(function () {
@@ -144,39 +125,6 @@ const PersonalPage = () => {
         };
     };
 
-    //   const ChangePassword = () => {
-    //     const obj = JSON.parse(sessionStorage.getItem("user"));
-    //     fetch("https://localhost:7102/Account/ChangePassword", {
-    //       method: "PUT",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: "bearer " + obj.token,
-    //         oldPassword: inputOldPasswordRef.current.value,
-    //         newPassword: inputNewPasswordRef.current.value,
-    //       },
-    //       body: JSON.stringify(user),
-    //     })
-    //     .then(async (res) => {
-    //       if (res.status === 200) {
-    //         setVariant('success');
-    //         setShow(true);
-    //         setMessage("Password changed");
-    //         inputOldPasswordRef.current.value = "";
-    //         inputNewPasswordRef.current.value = "";
-    //         refreshData();
-    //       } else {
-    //         const x = await res.json();
-    //         if (x.length > 0) {
-    //           setMessage(x[0]);
-    //           setVariant('danger');
-    //           setShow(true);
-    //         } else {
-    //           setShow(false);
-    //           refreshData();
-    //         }
-    //       }
-    //     });
-    //   };
     const handleChange = (e) => {
         const {
             target: { value }

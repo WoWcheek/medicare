@@ -8,8 +8,9 @@ import SideBar from "./SideBar";
 import "./AppLayout.scss";
 import { setInfo } from "../redux/Catalog/catalogSlice";
 import Header from "./Header";
+import Doctors from "../pages/Doctors/Doctors";
 
-const AuthorizedRoutes = () => {
+const AuthorizedRoutes = ({ isPatient }) => {
     const dispatch = useDispatch();
     const [getUser] = useGetUserMutation();
     const [getInfo] = useGetInfoMutation();
@@ -31,6 +32,7 @@ const AuthorizedRoutes = () => {
                 <Routes>
                     <Route exact path="/" element={<div>main content</div>} />
                     <Route exact path="/personal" element={<PersonalPage />} />
+                    {isPatient && <Route exact path="/doctors" element={<Doctors />} /> }
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </main>
