@@ -74,7 +74,7 @@ namespace Medicare.WebApp.Server.Controllers
         [Authorize]
         public async Task<IActionResult> GetDoctor(Guid id)
         {
-            var user = _context.Users.Include(x => x.UserSpecializations).FirstOrDefault(x => x.Id == id);
+            var user = _context.Users.Include(x => x.UserSpecializations).ThenInclude(x=>x.Specialization).FirstOrDefault(x => x.Id == id);
 
             return Ok(new
             {
@@ -84,7 +84,7 @@ namespace Medicare.WebApp.Server.Controllers
                 user.Avatar,
                 user.Email,
                 user.PhoneNumber,
-                specializations = user.UserSpecializations?.Select(x => x.SpecializationId).ToList()
+                specializations = user.UserSpecializations?.Select(x => x.Specialization.Name).ToList()
             });
         }
 

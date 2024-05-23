@@ -116,7 +116,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         getDoctor: builder.mutation({
             query: (creds) => ({
-                url: '/auth/GetDoctors?id='+creds,
+                url: '/auth/GetDoctor?id='+creds,
                 method: 'GET',
             }),
             extraOptions: { }

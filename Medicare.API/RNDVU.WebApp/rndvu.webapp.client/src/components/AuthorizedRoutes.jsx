@@ -9,6 +9,8 @@ import "./AppLayout.scss";
 import { setInfo } from "../redux/Catalog/catalogSlice";
 import Header from "./Header";
 import Doctors from "../pages/Doctors/Doctors";
+import Doctor from "../pages/Doctor/Doctor";
+import Appointment from "../pages/Appointment/Appointment";
 
 const AuthorizedRoutes = ({ isPatient }) => {
     const dispatch = useDispatch();
@@ -32,7 +34,12 @@ const AuthorizedRoutes = ({ isPatient }) => {
                 <Routes>
                     <Route exact path="/" element={<div>main content</div>} />
                     <Route exact path="/personal" element={<PersonalPage />} />
-                    {isPatient && <Route exact path="/doctors" element={<Doctors />} /> }
+                    {isPatient &&
+                        <>
+                            <Route exact path="/doctors" element={<Doctors />} />
+                            <Route exact path="/doctor/:id" element={<Doctor />} />
+                            <Route exact path="/appointment/:id" element={<Appointment />} />
+                        </>}
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </main>
