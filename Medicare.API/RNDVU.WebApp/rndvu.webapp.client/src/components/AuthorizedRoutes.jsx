@@ -11,6 +11,7 @@ import Header from "./Header";
 import Doctors from "../pages/Doctors/Doctors";
 import Doctor from "../pages/Doctor/Doctor";
 import Appointment from "../pages/Appointment/Appointment";
+import Appointments from "../pages/Appointments/Appointments";
 
 const AuthorizedRoutes = ({ isPatient }) => {
     const dispatch = useDispatch();
@@ -38,7 +39,8 @@ const AuthorizedRoutes = ({ isPatient }) => {
                         <>
                             <Route exact path="/doctors" element={<Doctors />} />
                             <Route exact path="/doctor/:id" element={<Doctor />} />
-                            <Route exact path="/appointment/:id" element={<Appointment />} />
+                            <Route exact path="/appointments" element={<Appointments />} />
+                            <Route exact path="/appointment/:id" element={<Appointment />} />Appointments
                         </>}
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>

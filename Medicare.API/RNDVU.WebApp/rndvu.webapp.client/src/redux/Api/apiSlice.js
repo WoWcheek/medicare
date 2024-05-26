@@ -114,9 +114,33 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             extraOptions: { }
         }),
+        makeAppointment: builder.mutation({
+            query: (creds) => ({
+                url: '/auth/makeAppointment',
+                method: 'POST',
+                body: {
+                    ...creds
+                }
+            }),
+            extraOptions: { }
+        }),
+        getAppointments: builder.mutation({
+            query: (creds) => ({
+                url: '/auth/getAppointments?id='+creds,
+                method: 'GET',
+            }),
+            extraOptions: {}
+        }),
         getDoctor: builder.mutation({
             query: (creds) => ({
-                url: '/auth/GetDoctor?id='+creds,
+                url: '/auth/GetDoctor?id=' + creds,
+                method: 'GET',
+            }),
+            extraOptions: {}
+        }),
+        getDoctorTimes: builder.mutation({
+            query: (creds) => ({
+                url: '/auth/GetDoctorAppoimtments?id='+creds,
                 method: 'GET',
             }),
             extraOptions: { }
@@ -125,6 +149,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 
-export const { useLoginMutation, useRegisterMutation, useGetUserMutation,
-    useGetInfoMutation, useSetAvatarMutation,
+export const { useLoginMutation, useRegisterMutation, useGetUserMutation, useMakeAppointmentMutation,
+    useGetInfoMutation, useSetAvatarMutation, useGetDoctorTimesMutation,useGetAppointmentsMutation,
      useChangePasswordMutation, useEditProfileMutation, useGetDoctorMutation, useGetDoctorsMutation } = authApiSlice;
