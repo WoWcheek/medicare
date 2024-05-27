@@ -87,6 +87,8 @@ namespace Medicare.WebApp.Server.Controllers
                 allAppoinementsCount,
                 upcomingCount,
                 differentDoctorsOrUsersCount,
+                weekAppointmentsCount,
+                dayAppointmentsCount,
                 token = HttpContext.GetTokenAsync("access_token"),
                 specializations = user.UserSpecializations?.Select(x => x.SpecializationId).ToList()
             });
