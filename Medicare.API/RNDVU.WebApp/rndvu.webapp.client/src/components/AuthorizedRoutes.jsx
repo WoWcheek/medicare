@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useGetInfoMutation, useGetUserMutation } from "../redux/Api/apiSlice";
+import { useGetUserMutation } from "../redux/Api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/Auth/authSlice";
 import PersonalPage from "../pages/PersonalPage/PersonalPage";
@@ -17,14 +17,11 @@ import Help from "../pages/Help/Help";
 const AuthorizedRoutes = ({ isPatient }) => {
     const dispatch = useDispatch();
     const [getUser] = useGetUserMutation();
-    const [getInfo] = useGetInfoMutation();
 
     useEffect(() => {
         (async () => {
             const userData = await getUser().unwrap();
             dispatch(setUser(userData));
-            const allData = await getInfo().unwrap();
-            dispatch(setInfo(allData));
         })();
     }, []);
 

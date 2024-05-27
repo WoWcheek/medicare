@@ -62,21 +62,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         getUser: builder.mutation({
             query: () => ({
-                url: "/auth/getUser",
-                method: "GET"
-            }),
-            extraOptions: {}
-        }),
-        getInfo: builder.mutation({
-            query: () => ({
-                url: "/catalog/getInfo",
+                url: "/user/getUser",
                 method: "GET"
             }),
             extraOptions: {}
         }),
         setAvatar: builder.mutation({
             query: (creds) => ({
-                url: "/auth/ChangeAvatar",
+                url: "/user/ChangeAvatar",
                 method: "POST",
                 body: {
                     ...creds
@@ -86,7 +79,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         changePassword: builder.mutation({
             query: (creds) => ({
-                url: "/auth/ChangePassword",
+                url: "/user/ChangePassword",
                 method: "POST",
                 body: {
                     ...creds
@@ -96,7 +89,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         editProfile: builder.mutation({
             query: (creds) => ({
-                url: "/auth/EditUser",
+                url: "/user/EditUser",
                 method: "POST",
                 body: {
                     ...creds
@@ -106,7 +99,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         getDoctors: builder.mutation({
             query: (creds) => ({
-                url: "/auth/GetDoctors",
+                url: "/user/GetDoctors",
                 method: "POST",
                 body: {
                     ...creds
@@ -116,7 +109,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         makeAppointment: builder.mutation({
             query: (creds) => ({
-                url: "/auth/makeAppointment",
+                url: "/appointment/makeAppointment",
                 method: "POST",
                 body: {
                     ...creds
@@ -126,21 +119,21 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         getAppointments: builder.mutation({
             query: (creds) => ({
-                url: "/auth/getAppointments?id=" + creds,
+                url: "/appointment/getAppointments?id=" + creds,
                 method: "GET"
             }),
             extraOptions: {}
         }),
         getDoctor: builder.mutation({
             query: (creds) => ({
-                url: "/auth/GetDoctor?id=" + creds,
+                url: "/user/GetDoctor?id=" + creds,
                 method: "GET"
             }),
             extraOptions: {}
         }),
         getDoctorTimes: builder.mutation({
             query: (creds) => ({
-                url: "/auth/GetDoctorAppointments?id=" + creds,
+                url: "/appointment/GetDoctorAppointments?id=" + creds,
                 method: "GET"
             }),
             extraOptions: {}
@@ -153,7 +146,6 @@ export const {
     useRegisterMutation,
     useGetUserMutation,
     useMakeAppointmentMutation,
-    useGetInfoMutation,
     useSetAvatarMutation,
     useGetDoctorTimesMutation,
     useGetAppointmentsMutation,
