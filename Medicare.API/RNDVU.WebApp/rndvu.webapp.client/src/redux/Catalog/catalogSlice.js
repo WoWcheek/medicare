@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-   specializations: []
-}
+    specializations: []
+};
 
 export const catalogSlice = createSlice({
     name: "catalog",
@@ -11,7 +11,7 @@ export const catalogSlice = createSlice({
         setInfo: (state, action) => ({
             ...state,
             ...action.payload
-        }),
+        })
     }
 });
 

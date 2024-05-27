@@ -1,4 +1,4 @@
-main {
+main.sign-up {
     display: flex;
     justify-content: space-between;
     height: 100vh;
@@ -6,24 +6,9 @@ main {
     background-color: var(--bg-color);
 }
 
-main > div {
+main.sign-up > div {
     height: 100%;
     width: 50%;
-}
-
-.half-y-div {
-    height: 45%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.half-y-div:first-child {
-    justify-content: flex-end;
-}
-
-.half-y-div:last-child {
-    justify-content: flex-start;
 }
 
 .image-container {

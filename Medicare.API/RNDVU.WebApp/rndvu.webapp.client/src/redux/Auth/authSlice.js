@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     id: null,
     token: ""
-}
+};
 
 export const authSlice = createSlice({
     name: "auth",
@@ -14,10 +14,10 @@ export const authSlice = createSlice({
             ...action.payload
         }),
         refreshToken: (state, action) => ({
-           ...state,
+            ...state,
             token: action.payload.token
         }),
-        logout: (state, action) => (initialState),
+        logout: (state, action) => initialState,
         setAuthStepsModel: (state, action) => {
             const stepIndex = action.payload.step - 1;
             const stepModel = action.payload.model;
@@ -34,11 +34,7 @@ export const authSlice = createSlice({
     }
 });
 
-export const { 
-    setUser, 
-    refreshToken,
-    setAuthStepsModel ,
-    logout
-} = authSlice.actions;
+export const { setUser, refreshToken, setAuthStepsModel, logout } =
+    authSlice.actions;
 
 export default authSlice.reducer;

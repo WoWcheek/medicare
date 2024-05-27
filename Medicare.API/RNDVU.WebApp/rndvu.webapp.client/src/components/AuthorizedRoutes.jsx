@@ -35,13 +35,30 @@ const AuthorizedRoutes = ({ isPatient }) => {
                 <Routes>
                     <Route exact path="/" element={<div>main content</div>} />
                     <Route exact path="/personal" element={<PersonalPage />} />
-                    {isPatient &&
+                    {isPatient && (
                         <>
-                            <Route exact path="/doctors" element={<Doctors />} />
-                            <Route exact path="/doctor/:id" element={<Doctor />} />
-                            <Route exact path="/appointments" element={<Appointments />} />
-                            <Route exact path="/appointment/:id" element={<Appointment />} />Appointments
-                        </>}
+                            <Route
+                                exact
+                                path="/doctors"
+                                element={<Doctors />}
+                            />
+                            <Route
+                                exact
+                                path="/doctor/:id"
+                                element={<Doctor />}
+                            />
+                            <Route
+                                exact
+                                path="/appointments"
+                                element={<Appointments />}
+                            />
+                            <Route
+                                exact
+                                path="/appointment/:id"
+                                element={<Appointment />}
+                            />
+                        </>
+                    )}
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </main>

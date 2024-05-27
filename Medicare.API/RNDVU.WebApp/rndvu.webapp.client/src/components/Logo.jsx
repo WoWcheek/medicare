@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
+import { useColorScheme } from "../helpers/useColorScheme";
+import { useEffect } from "react";
 
 function Logo({ logoSize, fontSize }) {
+    const { isDark } = useColorScheme();
+
     const flexCssStyle = {
         display: "flex",
         justifyContent: "center",
@@ -19,7 +23,11 @@ function Logo({ logoSize, fontSize }) {
     return (
         <div style={flexCssStyle} className="logo-container">
             <img
-                src="src/assets/images/logo-dark.png"
+                src={
+                    isDark
+                        ? "src/assets/images/logo-light.png"
+                        : "src/assets/images/logo-dark.png"
+                }
                 alt="medicare logo"
                 height={logoSize || 50}
             />

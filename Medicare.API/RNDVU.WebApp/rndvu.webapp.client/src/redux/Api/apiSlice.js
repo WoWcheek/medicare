@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
-import { setUser } from "../Auth/authSlice"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setUser } from "../Auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://localhost:7012/api',
-    credentials: 'same-origin',
+    baseUrl: "https://localhost:7012/api",
+    credentials: "same-origin",
     prepareHeaders: (headers, { getState }) => {
         const token = localStorage.getItem("token") || getState().auth.token;
 
@@ -16,68 +16,68 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
-    let result = await baseQuery(args, api, extraOptions)
+    let result = await baseQuery(args, api, extraOptions);
     if (result?.error?.originalStatus === 403) {
-        const refreshResult = await baseQuery("/refresh", api, extraOptions)
+        const refreshResult = await baseQuery("/refresh", api, extraOptions);
 
         if (refreshResult?.data) {
-            const user = api.getState().auth.user
-            api.dispatch(setCredentials({ ...refreshResult.data, user }))
+            const user = api.getState().auth.user;
+            api.dispatch(setCredentials({ ...refreshResult.data, user }));
 
-            result = await baseQuery(args, api, extraOptions)
+            result = await baseQuery(args, api, extraOptions);
         } else {
-            api.dispatch(logout())
+            api.dispatch(logout());
         }
     }
 
     return result;
-}
+};
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
-    endpoints: builder => ({})
+    endpoints: (builder) => ({})
 });
 
 export const authApiSlice = apiSlice.injectEndpoints({
-    endpoints: builder => ({
+    endpoints: (builder) => ({
         register: builder.mutation({
-            query: creds =>({
-                url:'/auth/register',
-                method: 'POST',
+            query: (creds) => ({
+                url: "/auth/register",
+                method: "POST",
                 body: {
                     ...creds
                 }
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         login: builder.mutation({
-            query: creds =>({
-                url:'/auth/login',
-                method: 'POST',
+            query: (creds) => ({
+                url: "/auth/login",
+                method: "POST",
                 body: {
                     ...creds
                 }
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         getUser: builder.mutation({
-            query: () =>({
-                url:'/auth/getUser',
-                method: 'GET'
+            query: () => ({
+                url: "/auth/getUser",
+                method: "GET"
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         getInfo: builder.mutation({
-            query: () =>({
-                url:'/catalog/getInfo',
-                method: 'GET'
+            query: () => ({
+                url: "/catalog/getInfo",
+                method: "GET"
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         setAvatar: builder.mutation({
             query: (creds) => ({
-                url: '/auth/ChangeAvatar',
-                method: 'POST',
+                url: "/auth/ChangeAvatar",
+                method: "POST",
                 body: {
                     ...creds
                 }
@@ -86,8 +86,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         changePassword: builder.mutation({
             query: (creds) => ({
-                url: '/auth/ChangePassword',
-                method: 'POST',
+                url: "/auth/ChangePassword",
+                method: "POST",
                 body: {
                     ...creds
                 }
@@ -96,59 +96,69 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }),
         editProfile: builder.mutation({
             query: (creds) => ({
-                url: '/auth/EditUser',
-                method: 'POST',
+                url: "/auth/EditUser",
+                method: "POST",
                 body: {
                     ...creds
                 }
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         getDoctors: builder.mutation({
             query: (creds) => ({
-                url: '/auth/GetDoctors',
-                method: 'POST',
+                url: "/auth/GetDoctors",
+                method: "POST",
                 body: {
                     ...creds
                 }
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         makeAppointment: builder.mutation({
             query: (creds) => ({
-                url: '/auth/makeAppointment',
-                method: 'POST',
+                url: "/auth/makeAppointment",
+                method: "POST",
                 body: {
                     ...creds
                 }
             }),
-            extraOptions: { }
+            extraOptions: {}
         }),
         getAppointments: builder.mutation({
             query: (creds) => ({
-                url: '/auth/getAppointments?id='+creds,
-                method: 'GET',
+                url: "/auth/getAppointments?id=" + creds,
+                method: "GET"
             }),
             extraOptions: {}
         }),
         getDoctor: builder.mutation({
             query: (creds) => ({
-                url: '/auth/GetDoctor?id=' + creds,
-                method: 'GET',
+                url: "/auth/GetDoctor?id=" + creds,
+                method: "GET"
             }),
             extraOptions: {}
         }),
         getDoctorTimes: builder.mutation({
             query: (creds) => ({
-                url: '/auth/GetDoctorAppoimtments?id='+creds,
-                method: 'GET',
+                url: "/auth/GetDoctorAppointments?id=" + creds,
+                method: "GET"
             }),
-            extraOptions: { }
-        })                
+            extraOptions: {}
+        })
     })
 });
 
-
-export const { useLoginMutation, useRegisterMutation, useGetUserMutation, useMakeAppointmentMutation,
-    useGetInfoMutation, useSetAvatarMutation, useGetDoctorTimesMutation,useGetAppointmentsMutation,
-     useChangePasswordMutation, useEditProfileMutation, useGetDoctorMutation, useGetDoctorsMutation } = authApiSlice;
+export const {
+    useLoginMutation,
+    useRegisterMutation,
+    useGetUserMutation,
+    useMakeAppointmentMutation,
+    useGetInfoMutation,
+    useSetAvatarMutation,
+    useGetDoctorTimesMutation,
+    useGetAppointmentsMutation,
+    useChangePasswordMutation,
+    useEditProfileMutation,
+    useGetDoctorMutation,
+    useGetDoctorsMutation
+} = authApiSlice;

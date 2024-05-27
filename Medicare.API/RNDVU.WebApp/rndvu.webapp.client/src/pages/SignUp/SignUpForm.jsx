@@ -36,8 +36,8 @@ function SignUpForm() {
                 fullName: fullnameEl.current.value,
                 isPatient: isPatient.current.checked
             }).unwrap();
-        localStorage.setItem("isPatient", userData.isPatient);
-        dispatch(setUser(userData));
+            localStorage.setItem("isPatient", userData.isPatient);
+            dispatch(setUser(userData));
             asyncLocalStorage
                 .setItem("token", userData.token)
                 .then(() => history("/"));
@@ -50,70 +50,62 @@ function SignUpForm() {
 
     return (
         <>
-            <div className="half-y-div">
-                <Logo />
-                <form noValidate className="login-form" method="POST" action="">
-                    <Stack spacing={2} width={280}>
-                        <TextField
-                            label="Email"
-                            variant="standard"
-                            size="small"
-                            type="email"
-                            name="email"
-                            inputRef={emailEl}
-                        />
+            <Logo />
+            <form noValidate className="login-form" method="POST" action="">
+                <Stack spacing={2} width={280}>
+                    <TextField
+                        label="Email"
+                        variant="standard"
+                        size="small"
+                        type="email"
+                        name="email"
+                        inputRef={emailEl}
+                    />
 
-                        <TextField
-                            label="Full Name"
-                            variant="standard"
-                            size="small"
-                            type="fullname"
-                            name="fullName "
-                            inputRef={fullnameEl}
+                    <TextField
+                        label="Full Name"
+                        variant="standard"
+                        size="small"
+                        type="fullname"
+                        name="fullName "
+                        inputRef={fullnameEl}
+                    />
+                    <TextField
+                        label="Password"
+                        variant="standard"
+                        size="small"
+                        type="password"
+                        name="password "
+                        inputRef={passwordEl}
+                    />
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="patient"
+                        name="radio-buttons-group"
+                    >
+                        <FormControlLabel
+                            value="patient"
+                            control={<Radio inputRef={isPatient} />}
+                            label="I'm a patient"
                         />
-                        <TextField
-                            label="Password"
-                            variant="standard"
-                            size="small"
-                            type="password"
-                            name="password "
-                            inputRef={passwordEl}
+                        <FormControlLabel
+                            value="doctor"
+                            control={<Radio />}
+                            label="I'm a doctor"
                         />
-                        <RadioGroup
-                            aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="patient"
-                            name="radio-buttons-group"
-                        >
-                            <FormControlLabel
-                                value="patient"
-                                control={<Radio inputRef={isPatient} />}
-                                label="I'm a patient"
-                            />
-                            <FormControlLabel
-                                value="doctor"
-                                control={<Radio />}
-                                label="I'm a doctor"
-                            />
-                        </RadioGroup>
-                    </Stack>
-                </form>
-            </div>
+                    </RadioGroup>
+                </Stack>
+            </form>
 
-            <div className="half-y-div">
-                <div className="btns-container">
-                    <div className="link-container">
-                        <Link underline="hover" to="/login" component={NavLink}>
-                            Cancel
-                        </Link>
-                    </div>
-                    <SubmitButton variant="contained" onClick={registration}>
-                        Sign up
-                    </SubmitButton>
+            <div className="btns-container">
+                <div className="link-container">
+                    <Link underline="hover" to="/login" component={NavLink}>
+                        Cancel
+                    </Link>
                 </div>
-                <div className="line-through-text">
-                    <hr />
-                    <h5>or</h5>
-                </div>
+                <SubmitButton variant="contained" onClick={registration}>
+                    Sign up
+                </SubmitButton>
             </div>
         </>
     );

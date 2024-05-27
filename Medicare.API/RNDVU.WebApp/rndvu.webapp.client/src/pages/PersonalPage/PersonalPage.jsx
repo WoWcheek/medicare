@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Alert, Button } from "react-bootstrap";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Button } from "react-bootstrap";
 import "./PersonalPage.scss";
 import defaultIcon from "../../assets/images/default-user-image.png";
 import {
@@ -76,8 +76,6 @@ const PersonalPage = () => {
                 position: "top-right"
             });
         }
-
-    
     }, [user, selectedSpecs, userForm]);
 
     const changePass = useCallback(async () => {
@@ -215,66 +213,69 @@ const PersonalPage = () => {
                                             </div>
 
                                             {catalog?.specializations.length >
-                                                0 && (
-                                                <div className="mb-3 w-100 pt-1">
-                                                    <FormControl
-                                                        sx={{ width: 424 }}
-                                                    >
-                                                        <InputLabel id="demo-multiple-checkbox-label">
-                                                            Specialize on:
-                                                        </InputLabel>
-                                                        <Select
-                                                            labelId="demo-multiple-checkbox-label"
-                                                            id="demo-multiple-checkbox"
-                                                            multiple
-                                                            value={personName}
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                            input={
-                                                                <OutlinedInput label="Specialize on:" />
-                                                            }
-                                                            renderValue={(
-                                                                selected
-                                                            ) =>
-                                                                selected.join(
-                                                                    ", "
-                                                                )
-                                                            }
-                                                            MenuProps={
-                                                                MenuProps
-                                                            }
+                                                0 &&
+                                                !user.isPatient && (
+                                                    <div className="mb-3 w-100 pt-1">
+                                                        <FormControl
+                                                            sx={{ width: 424 }}
                                                         >
-                                                            {catalog?.specializations.map(
-                                                                (name) => (
-                                                                    <MenuItem
-                                                                        key={
-                                                                            name.name
-                                                                        }
-                                                                        value={
-                                                                            name.name
-                                                                        }
-                                                                    >
-                                                                        <Checkbox
-                                                                            checked={
-                                                                                personName.indexOf(
-                                                                                    name.name
-                                                                                ) >
-                                                                                -1
-                                                                            }
-                                                                        />
-                                                                        <ListItemText
-                                                                            primary={
+                                                            <InputLabel id="demo-multiple-checkbox-label">
+                                                                Specialize on:
+                                                            </InputLabel>
+                                                            <Select
+                                                                labelId="demo-multiple-checkbox-label"
+                                                                id="demo-multiple-checkbox"
+                                                                multiple
+                                                                value={
+                                                                    personName
+                                                                }
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                                input={
+                                                                    <OutlinedInput label="Specialize on:" />
+                                                                }
+                                                                renderValue={(
+                                                                    selected
+                                                                ) =>
+                                                                    selected.join(
+                                                                        ", "
+                                                                    )
+                                                                }
+                                                                MenuProps={
+                                                                    MenuProps
+                                                                }
+                                                            >
+                                                                {catalog?.specializations.map(
+                                                                    (name) => (
+                                                                        <MenuItem
+                                                                            key={
                                                                                 name.name
                                                                             }
-                                                                        />
-                                                                    </MenuItem>
-                                                                )
-                                                            )}
-                                                        </Select>
-                                                    </FormControl>
-                                                </div>
-                                            )}
+                                                                            value={
+                                                                                name.name
+                                                                            }
+                                                                        >
+                                                                            <Checkbox
+                                                                                checked={
+                                                                                    personName.indexOf(
+                                                                                        name.name
+                                                                                    ) >
+                                                                                    -1
+                                                                                }
+                                                                            />
+                                                                            <ListItemText
+                                                                                primary={
+                                                                                    name.name
+                                                                                }
+                                                                            />
+                                                                        </MenuItem>
+                                                                    )
+                                                                )}
+                                                            </Select>
+                                                        </FormControl>
+                                                    </div>
+                                                )}
 
                                             <div className="mb-3">
                                                 <label

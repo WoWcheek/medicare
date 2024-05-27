@@ -14,5 +14,5 @@ const asyncLocalStorage = {
             return localStorage.removeItem(key);
         });
     }
- };
- export default asyncLocalStorage;
+};
+export default asyncLocalStorage;

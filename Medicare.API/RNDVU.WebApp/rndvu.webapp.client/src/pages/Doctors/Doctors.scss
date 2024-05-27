@@ -1,0 +1,45 @@
+.doctors {
+    h3 {
+        line-height: 55px;
+        letter-spacing: 0.7px;
+        color: var(---main-text-color);
+        margin: 0;
+    }
+
+    hr {
+        align-self: center;
+        width: 90%;
+        border-width: 1px;
+        margin-top: 2.2rem;
+        color: var(--text-color);
+    }
+
+    .card {
+        width: 17rem;
+        margin: 1.8rem 2.5rem 0;
+        border-color: var(--main-text-color);
+
+        h5,
+        p {
+            color: var(--main-text-color);
+        }
+
+        h5 {
+            font-weight: 600;
+        }
+
+        .doctor-btn {
+            border: 2px solid var(--main-text-color);
+            padding: 4px 8px;
+            border-radius: 5px;
+            background-color: var(--dark-bg-color);
+            font-size: 1.1rem;
+            width: 100%;
+        }
+    }
+
+    button {
+        font-size: 1.5rem;
+        letter-spacing: 1.5px;
+    }
+}

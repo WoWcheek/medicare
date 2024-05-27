@@ -1,38 +1,34 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
-import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import { FormControl,FormLabel, FormControlLabel, Radio, RadioGroup, ListItemButton, ListItemText, List, ListItem, Box } from "@mui/material";
-import { useGetAppointmentsMutation, useGetDoctorTimesMutation, useMakeAppointmentMutation } from "../../redux/Api/apiSlice";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGetAppointmentsMutation } from "../../redux/Api/apiSlice";
 import { useSelector } from "react-redux";
+import AppointmentCard from "./AppointmentCard";
+import "./Appointments.scss";
 
 const Appointments = () => {
     const user = useSelector((state) => state.auth);
     const [getAppointments] = useGetAppointmentsMutation();
     const [apps, setApps] = useState([]);
-    const history = useNavigate();
+    const navigate = useNavigate();
+
     useEffect(() => {
         (async () => {
             try {
                 const doctorr = await getAppointments(user.id).unwrap();
                 setApps(doctorr);
-            }
-            catch (e) {
-                history('/')
+            } catch (e) {
+                navigate("/");
             }
         })();
     }, [user.id]);
 
-
-
     return (
-        <div className="d-flex justify-content-between w-100">
-          {apps.length ==0 && <div>No appointments</div>}
-          {apps.map(x=>(
-              <div className="">{x.appointment.doctor.fullName}</div>
-
-
-          ))}
+        <div className="d-flex flex-column justify-content-between w-100">
+            {apps.length == 0 ? (
+                <p className="no-apps">No appointments yet ...</p>
+            ) : (
+                apps.map((x) => <AppointmentCard appointment={x} key={x.id} />)
+            )}
         </div>
     );
 };

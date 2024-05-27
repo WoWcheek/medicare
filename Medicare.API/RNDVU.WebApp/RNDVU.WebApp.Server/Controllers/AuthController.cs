@@ -222,7 +222,7 @@ namespace Medicare.WebApp.Server.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> GetDoctorAppoimtments(Guid id)
+        public async Task<IActionResult> GetDoctorAppointments(Guid id)
         {
             var user = _context.Appointments.Where(x => x.Date > DateTime.Today && x.DoctorId == id);
             var t = user.GroupBy(x => x.Date);

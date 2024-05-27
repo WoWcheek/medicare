@@ -1,10 +1,6 @@
-.personal {
-    margin-top: 30px !important;
-}
-
 .personal > div {
-    width: clamp(500px, 60%, 650px);
-    background-color: var(--bg-color);
+    width: clamp(500px, 70%, 650px);
+    background-color: var(--dark-bg-color);
 }
 
 .personal img {

@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
+import { useColorScheme } from "../helpers/useColorScheme.js";
 import ButtonIcon from "./ButtonIcon";
 
 function DarkModeToggle() {
-    // const { isDarkMode, toggleDarkMode } = useDarkMode();
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const { isDark, setIsDark } = useColorScheme();
+
+    useEffect(() => {
+        if (isDark) document.body.classList.add("dark");
+        else document.body.classList.remove("dark");
+    }, [isDark]);
 
     return (
-        <ButtonIcon onClick={() => setIsDarkMode((x) => !x)}>
-            {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
+        <ButtonIcon onClick={() => setIsDark((x) => !x)}>
+            {isDark ? <HiOutlineSun /> : <HiOutlineMoon />}
         </ButtonIcon>
     );
 }
