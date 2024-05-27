@@ -12,6 +12,7 @@ import Doctors from "../pages/Doctors/Doctors";
 import Doctor from "../pages/Doctor/Doctor";
 import Appointment from "../pages/Appointment/Appointment";
 import Appointments from "../pages/Appointments/Appointments";
+import Help from "../pages/Help/Help";
 
 const AuthorizedRoutes = ({ isPatient }) => {
     const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const AuthorizedRoutes = ({ isPatient }) => {
             <main>
                 <Routes>
                     <Route exact path="/" element={<div>main content</div>} />
+                    <Route exact path="/help" element={<Help />} />
                     <Route exact path="/personal" element={<PersonalPage />} />
                     {isPatient && (
                         <>

@@ -19,6 +19,7 @@ import {
     useMakeAppointmentMutation
 } from "../../redux/Api/apiSlice";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Appointment = () => {
     const params = useParams();
@@ -179,6 +180,7 @@ const Appointment = () => {
                     doctorId: params.id,
                     userId: user.id
                 }).unwrap();
+                toast.success("Appointment is created!");
                 history("/");
             } catch {
                 console.error("error occurred while making an appointment");

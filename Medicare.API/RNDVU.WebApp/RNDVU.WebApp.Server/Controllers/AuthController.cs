@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +10,11 @@ using Medicare.WebApp.Server.Context;
 using Medicare.WebApp.Server.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.Security.Principal;
-using Azure;
-using Microsoft.AspNetCore.DataProtection;
 using System.Net.Http.Headers;
 using System.Text;
-using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 namespace Medicare.WebApp.Server.Controllers
 {
@@ -43,6 +38,42 @@ namespace Medicare.WebApp.Server.Controllers
         public async Task<IActionResult> GetUser()
         {
             var user = _context.Users.Include(x => x.UserSpecializations).FirstOrDefault(x => x.Email == User.Identity.Name);
+            var allAppoinementsCount = _context.Appointments.Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).Count();
+            var upcomingCount = _context.Appointments.Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).ToList().Where(x =>
+            {
+                var t = new DateTime(x.Date.Year, x.Date.Month, x.Date.Day).AddHours(Convert.ToInt64(x.Time.Substring(0, 2)));
+
+                if (x.Time[3] == '3')
+                {
+                    t.AddMinutes(30);
+                }
+                return t > DateTime.Now;
+            }).Count();
+
+            var differentDoctorsOrUsersCount = _context.Appointments
+                .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).DistinctBy(x => x.DoctorId == user.Id ? x.DoctorId : x.UserId).Count();
+
+            var weekAppointmentsCount = _context.Appointments
+                .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).ToList().Where(x =>
+                {
+                    DateTime now = DateTime.Now;
+
+                    CultureInfo cultureInfo = CultureInfo.CurrentCulture;
+                    DayOfWeek firstDayOfWeek = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+                    DateTime startOfWeek = now.Date;
+                    while (startOfWeek.DayOfWeek != firstDayOfWeek)
+                    {
+                        startOfWeek = startOfWeek.AddDays(-1);
+                    }
+                    DateTime endOfWeek = startOfWeek.AddDays(6);
+                    return x.Date.Date >= startOfWeek && x.Date.Date <= endOfWeek;
+                });
+
+            var dayAppointmentsCount = _context.Appointments
+                .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).ToList().Where(x =>
+                {
+                    return x.Date.Date == DateTime.Now.Date;
+                });
 
             return Ok(new
             {
@@ -53,10 +84,14 @@ namespace Medicare.WebApp.Server.Controllers
                 user.Avatar,
                 user.Email,
                 user.PhoneNumber,
+                allAppoinementsCount,
+                upcomingCount,
+                differentDoctorsOrUsersCount,
                 token = HttpContext.GetTokenAsync("access_token"),
                 specializations = user.UserSpecializations?.Select(x => x.SpecializationId).ToList()
             });
         }
+
         [Authorize]
         public async Task<IActionResult> GetDoctors([FromBody] FilterModel request)
         {
@@ -115,7 +150,7 @@ namespace Medicare.WebApp.Server.Controllers
                 return t > DateTime.Now;
             }).ToList();
 
-            var dgs = appointments.Select(y =>
+            var dgs = appointments.OrderBy(x=>x.Date).ThenBy(x=>x.Time).Select(y =>
             {
                 return new
                 {
@@ -130,7 +165,6 @@ namespace Medicare.WebApp.Server.Controllers
                         .ToList()
                 };
             });
-
 
             return Ok(dgs);
         }
@@ -202,6 +236,7 @@ namespace Medicare.WebApp.Server.Controllers
 
             try
             {
+                request.Date = request.Date.ToLocalTime();
                 request.Id = Guid.NewGuid();
                 request.Url = await CreateMeeting(request.IsShort, request.Date, request.Time);
                 _context.Appointments.Add(request);
