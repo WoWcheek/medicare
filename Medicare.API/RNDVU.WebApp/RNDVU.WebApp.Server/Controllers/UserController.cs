@@ -39,8 +39,11 @@ namespace Medicare.WebApp.Server.Controllers
                 return t > DateTime.Now;
             }).Count();
 
-            var differentDoctorsOrUsersCount = _context.Appointments
-                .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).DistinctBy(x => x.DoctorId == user.Id ? x.DoctorId : x.UserId).Count();
+            var differentDoctorsCount = _context.Appointments
+                .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).Select(x => x.DoctorId).Distinct().Count();
+
+            var differentUsersCount = _context.Appointments
+                .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).Select(x => x.UserId).Distinct().Count();
 
             var weekAppointmentsCount = _context.Appointments
                 .Where(x => (x.DoctorId == user.Id || x.UserId == user.Id)).ToList().Where(x =>
@@ -75,7 +78,7 @@ namespace Medicare.WebApp.Server.Controllers
                 user.PhoneNumber,
                 allAppoinementsCount,
                 upcomingCount,
-                differentDoctorsOrUsersCount,
+                differentDoctorsOrUsersCount = user.IsPatient ? differentDoctorsCount : differentUsersCount,
                 weekAppointmentsCount,
                 dayAppointmentsCount,
                 token = HttpContext.GetTokenAsync("access_token"),

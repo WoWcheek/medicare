@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import "./SideBar.scss";
@@ -8,6 +9,10 @@ import { MdOutlineHelp } from "react-icons/md";
 
 function SideBar() {
     const currentYear = 1900 + new Date().getYear();
+
+    const isPatient =
+        useSelector((state) => state.auth.isPatient) ||
+        localStorage.getItem("isPatient") === "true";
 
     return (
         <>
@@ -21,12 +26,14 @@ function SideBar() {
                             <span>Home</span>
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/doctors">
-                            <FaUserDoctor />
-                            <span>Doctors</span>
-                        </NavLink>
-                    </li>
+                    {isPatient && (
+                        <li>
+                            <NavLink to="/doctors">
+                                <FaUserDoctor />
+                                <span>Doctors</span>
+                            </NavLink>
+                        </li>
+                    )}
                     <li>
                         <NavLink to="/appointments">
                             <MdCalendarMonth />

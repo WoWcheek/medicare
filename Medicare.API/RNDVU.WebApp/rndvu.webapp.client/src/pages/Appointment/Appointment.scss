@@ -1,0 +1,27 @@
+.times {
+    background-color: var(--dark-bg-color);
+    width: 50%;
+
+    h5 {
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: wrap;
+
+        li {
+            width: fit-content;
+            background-color: var(--bg-color);
+            border-radius: 10%;
+
+            transition: all 0.3s;
+
+            &:hover {
+                background-color: var(--dark-bg-color);
+            }
+        }
+    }
+}

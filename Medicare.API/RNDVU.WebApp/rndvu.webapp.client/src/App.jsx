@@ -9,9 +9,7 @@ function App() {
         useSelector((state) => state.auth.token) ||
         localStorage.getItem("token");
 
-    const isPatient =
-        useSelector((state) => state.auth.isPatient) ||
-        localStorage.getItem("isPatient");
+    const isPatient = useSelector((state) => state.auth.isPatient);
 
     if (!accessToken) {
         return (
@@ -23,7 +21,13 @@ function App() {
         );
     }
 
-    return <AuthorizedRoutes isPatient={isPatient} />;
+    return (
+        <AuthorizedRoutes
+            isPatient={
+                localStorage.getItem("isPatient") === "true" || isPatient
+            }
+        />
+    );
 }
 
 export default App;

@@ -42,7 +42,12 @@ main.sign-up > div {
 }
 
 .form-container label {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: var(--main-text-color) !important;
+    opacity: 0.5 !important;
+}
+
+.MuiRadioGroup-root label {
+    opacity: 1 !important;
 }
 
 .btns-container {

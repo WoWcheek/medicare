@@ -214,7 +214,10 @@ const PersonalPage = () => {
 
                                             {catalog?.specializations.length >
                                                 0 &&
-                                                !user.isPatient && (
+                                                (!localStorage.getItem(
+                                                    "isPatient"
+                                                ) ||
+                                                    !user.isPatient) && (
                                                     <div className="mb-3 w-100 pt-1">
                                                         <FormControl
                                                             sx={{ width: 424 }}

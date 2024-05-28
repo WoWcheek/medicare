@@ -1,15 +1,17 @@
 import PropTypes from "prop-types";
-import { useColorScheme } from "../helpers/useColorScheme";
-import { useEffect } from "react";
 
 function Logo({ logoSize, fontSize }) {
-    const { isDark } = useColorScheme();
-
     const flexCssStyle = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         gap: "10%"
+    };
+
+    const imgCssStyle = {
+        height: `${logoSize || 50}px`,
+        width: `${logoSize || 50}px`,
+        minWidth: `${logoSize || 50}px`
     };
 
     const h1CssStyle = {
@@ -22,7 +24,7 @@ function Logo({ logoSize, fontSize }) {
 
     return (
         <div style={flexCssStyle} className="logo-container">
-            <img
+            {/* <img
                 src={
                     isDark
                         ? "src/assets/images/logo-light.png"
@@ -30,7 +32,8 @@ function Logo({ logoSize, fontSize }) {
                 }
                 alt="medicare logo"
                 height={logoSize || 50}
-            />
+            /> */}
+            <div className="img-div" style={imgCssStyle}></div>
             <h1 style={h1CssStyle}>MediCare</h1>
         </div>
     );

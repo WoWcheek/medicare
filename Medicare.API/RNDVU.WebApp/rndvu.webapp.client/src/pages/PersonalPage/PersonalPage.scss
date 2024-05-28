@@ -3,21 +3,24 @@
     background-color: var(--dark-bg-color);
 }
 
-.personal img {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border: 3px solid var(--main-color);
-    border-radius: 50%;
+.personal {
+    img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border: 3px solid var(--main-color);
+        border-radius: 50%;
+    }
 }
 
 .card {
     border-color: var(--main-color);
+    background-color: var(--dark-bg-color);
 }
 
 .card-header {
     background-color: var(--main-color);
-    color: var(--bg-color);
+    color: #fff;
     letter-spacing: 0.7px;
 }
 
@@ -28,15 +31,17 @@ input:disabled {
 input[type="file"]::file-selector-button {
     border-radius: 0.2em;
     background-color: var(--main-color) !important;
-    color: var(--bg-color) !important;
+    color: #fff !important;
     transition: 0.2s;
 }
 
 .save-btn {
     align-self: center;
     border-color: var(--main-color) !important;
-}
+    color: var(--main-text-color) !important;
 
-.save-btn:hover {
-    background-color: var(--main-color);
+    &:hover {
+        background-color: var(--main-color);
+        color: #fff !important;
+    }
 }

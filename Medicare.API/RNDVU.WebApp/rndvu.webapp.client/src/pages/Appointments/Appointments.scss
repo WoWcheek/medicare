@@ -1,6 +1,55 @@
-.no-apps {
-    text-align: center;
-    font-size: 2rem;
-    color: var(--main-text-color);
+.appointments-h {
     font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.app-card {
+    width: 20rem;
+    overflow: hidden;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale(1.01);
+    }
+
+    h5,
+    p {
+        color: var(--main-text-color);
+    }
+
+    h5 {
+        font-weight: 600;
+        margin: 5px 0;
+    }
+
+    .date-time-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        p {
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+    }
+
+    .duration-link-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 15px 0 20px;
+
+        .zoom-link {
+            padding: 0 !important;
+            display: inline-block;
+            justify-content: flex-end;
+            text-decoration: underline;
+        }
+    }
+
+    .card-body {
+        padding-top: 5px;
+        padding-bottom: 0;
+        background-color: var(--bg-color);
+    }
 }

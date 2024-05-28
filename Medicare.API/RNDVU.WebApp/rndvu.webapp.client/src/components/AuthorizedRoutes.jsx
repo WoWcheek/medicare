@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useGetUserMutation } from "../redux/Api/apiSlice";
+import { useGetUserMutation, useGetInfoMutation } from "../redux/Api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/Auth/authSlice";
 import PersonalPage from "../pages/PersonalPage/PersonalPage";
@@ -13,15 +13,19 @@ import Doctor from "../pages/Doctor/Doctor";
 import Appointment from "../pages/Appointment/Appointment";
 import Appointments from "../pages/Appointments/Appointments";
 import Help from "../pages/Help/Help";
+import Home from "../pages/Home/Home";
 
 const AuthorizedRoutes = ({ isPatient }) => {
     const dispatch = useDispatch();
     const [getUser] = useGetUserMutation();
+    const [getInfo] = useGetInfoMutation();
 
     useEffect(() => {
         (async () => {
             const userData = await getUser().unwrap();
             dispatch(setUser(userData));
+            const allData = await getInfo().unwrap();
+            dispatch(setInfo(allData));
         })();
     }, []);
 
@@ -31,7 +35,7 @@ const AuthorizedRoutes = ({ isPatient }) => {
             <Header />
             <main>
                 <Routes>
-                    <Route exact path="/" element={<div>main content</div>} />
+                    <Route exact path="/" element={<Home />} />
                     <Route exact path="/help" element={<Help />} />
                     <Route exact path="/personal" element={<PersonalPage />} />
                     {isPatient && (

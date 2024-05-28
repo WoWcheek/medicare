@@ -107,6 +107,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             extraOptions: {}
         }),
+        getInfo: builder.mutation({
+            query: () => ({
+                url: "/catalog/getInfo",
+                method: "GET"
+            }),
+            extraOptions: {}
+        }),
         makeAppointment: builder.mutation({
             query: (creds) => ({
                 url: "/appointment/makeAppointment",
@@ -152,5 +159,6 @@ export const {
     useChangePasswordMutation,
     useEditProfileMutation,
     useGetDoctorMutation,
-    useGetDoctorsMutation
+    useGetDoctorsMutation,
+    useGetInfoMutation
 } = authApiSlice;

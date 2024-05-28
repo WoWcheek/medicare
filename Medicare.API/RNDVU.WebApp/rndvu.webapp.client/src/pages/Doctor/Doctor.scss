@@ -1,0 +1,45 @@
+.doctor {
+    .card {
+        background-color: var(--bg-color);
+    }
+
+    color: var(--main-text-color);
+
+    h2 {
+        letter-spacing: 2px;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    li {
+        text-align: left;
+        padding: 0;
+    }
+
+    .display-25 {
+        font-size: 1.4rem;
+    }
+
+    .spinner-grow {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    h4 {
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+
+    h5 {
+        font-style: italic;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        background-color: var(--main-color);
+        color: #fff;
+        letter-spacing: 1.2px;
+    }
+}
