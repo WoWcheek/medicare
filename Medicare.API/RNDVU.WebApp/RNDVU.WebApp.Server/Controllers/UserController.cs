@@ -17,7 +17,7 @@ namespace Medicare.WebApp.Server.Controllers
         private MedicareContext _context;
         private UserManager<User> UserManager;
 
-        public UserController(MedicareContext context, UserManager<User> userManager/*, IConfiguration conf*/)
+        public UserController(MedicareContext context, UserManager<User> userManager)
         {
             _context = context;
             UserManager = userManager;

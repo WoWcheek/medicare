@@ -3,6 +3,11 @@
         background-color: var(--bg-color);
     }
 
+    img {
+        max-height: 400px;
+        object-fit: cover;
+    }
+
     color: var(--main-text-color);
 
     h2 {

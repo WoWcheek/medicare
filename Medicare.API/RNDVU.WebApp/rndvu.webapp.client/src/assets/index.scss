@@ -48,6 +48,14 @@ body.dark {
     color: var(--main-text-color) !important;
 }
 
+.MuiRadio-root {
+    color: #fff !important;
+}
+
+.Mui-checked {
+    color: var(--main-color) !important;
+}
+
 .MuiDateCalendar-root button,
 .MuiDayCalendar-header span,
 .MuiFormLabel-root {

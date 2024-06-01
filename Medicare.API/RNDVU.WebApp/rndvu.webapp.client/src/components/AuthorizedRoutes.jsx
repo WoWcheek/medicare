@@ -38,6 +38,11 @@ const AuthorizedRoutes = ({ isPatient }) => {
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/help" element={<Help />} />
                     <Route exact path="/personal" element={<PersonalPage />} />
+                    <Route
+                        exact
+                        path="/appointments"
+                        element={<Appointments />}
+                    />
                     {isPatient && (
                         <>
                             <Route
@@ -49,11 +54,6 @@ const AuthorizedRoutes = ({ isPatient }) => {
                                 exact
                                 path="/doctor/:id"
                                 element={<Doctor />}
-                            />
-                            <Route
-                                exact
-                                path="/appointments"
-                                element={<Appointments />}
                             />
                             <Route
                                 exact

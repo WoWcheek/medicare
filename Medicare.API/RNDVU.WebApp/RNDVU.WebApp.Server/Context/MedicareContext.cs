@@ -16,8 +16,7 @@ public partial class MedicareContext : IdentityDbContext<User, IdentityRole<Guid
         Database.EnsureCreated();
     }
 
-    public MedicareContext(DbContextOptions<MedicareContext> options)
-        : base(options)
+    public MedicareContext(DbContextOptions<MedicareContext> options) : base(options)
     {
         Database.EnsureCreated();
     }
@@ -45,7 +44,5 @@ public partial class MedicareContext : IdentityDbContext<User, IdentityRole<Guid
                  .HasOne(us => us.Doctor)
                  .WithMany()
                  .HasForeignKey(us => us.DoctorId).OnDelete(DeleteBehavior.Restrict);
-
     }
-
 }

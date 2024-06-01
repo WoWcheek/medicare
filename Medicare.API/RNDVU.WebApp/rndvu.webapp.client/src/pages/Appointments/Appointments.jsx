@@ -29,7 +29,7 @@ const Appointments = () => {
                     ? "No appointments yet ..."
                     : "Upcoming appointments:"}
             </h2>
-            <div className="d-flex flex-wrap justify-content-between w-100">
+            <div className="d-flex flex-wrap justify-content-start apps-list w-100">
                 {apps.map((x) => (
                     <AppointmentCard
                         appointment={x}

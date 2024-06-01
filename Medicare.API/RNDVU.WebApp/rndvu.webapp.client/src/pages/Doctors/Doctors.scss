@@ -17,9 +17,14 @@
     .card {
         width: 17rem;
         margin: 1.8rem 2.5rem 0;
-        border-color: var(--main-text-color);
+        border-color: var(--main-color);
         background-color: var(--bg-color);
         transition: all 0.3s;
+
+        .card-img-top {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
 
         &:hover {
             transform: scale(1.02);

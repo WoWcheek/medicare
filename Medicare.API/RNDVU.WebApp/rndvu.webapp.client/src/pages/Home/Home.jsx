@@ -11,16 +11,15 @@ function Home() {
     const user = useSelector((state) => state.auth);
 
     if (!user.dayAppointmentsCount)
-        return (
-            <div
-                className="spinner-grow"
-                style={{ width: "5rem", height: "5rem" }}
-                role="status"
-            ></div>
-        );
+        return <div className="spinner-grow home-spinner" role="status"></div>;
 
+    const displayName =
+        user?.fullName.length <= 20
+            ? user?.fullName
+            : user?.fullName.split(" ")[0] || "";
     return (
         <div className="home">
+            <h2>Hi, {displayName}! Examine your Medicare activity:</h2>
             <Tile
                 color="#075985"
                 icon={<MdToday />}
@@ -44,7 +43,7 @@ function Home() {
                 icon={<MdOutlinePeopleAlt />}
                 title={
                     user.isPatient
-                        ? "Different doctors attended"
+                        ? "Different doctors contacted"
                         : "Different patients treated"
                 }
                 value={user?.differentDoctorsOrUsersCount}

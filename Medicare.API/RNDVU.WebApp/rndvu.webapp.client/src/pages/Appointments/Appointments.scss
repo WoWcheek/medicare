@@ -3,10 +3,20 @@
     margin-bottom: 2rem;
 }
 
+.apps-list {
+    gap: 8%;
+    row-gap: 20px;
+}
+
 .app-card {
     width: 20rem;
     overflow: hidden;
     transition: all 0.3s;
+
+    .card-img-top {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
 
     &:hover {
         transform: scale(1.01);

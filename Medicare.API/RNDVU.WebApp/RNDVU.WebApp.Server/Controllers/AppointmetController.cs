@@ -152,7 +152,6 @@ namespace Medicare.WebApp.Server.Controllers
         }
         private async Task<string> GenerateJWTToken()
         {
-
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
             var str = _conf.GetValue<string>("Zoom:ClientId") + ":" + _conf.GetValue<string>("Zoom:ClientSecret");
