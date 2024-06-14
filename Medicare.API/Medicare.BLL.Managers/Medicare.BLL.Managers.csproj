@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Medicare.BLL.DTO\Medicare.BLL.DTO.csproj" />
+    <ProjectReference Include="..\Medicare.BLL.Interfaces\Medicare.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\Medicare.DAL.Models\Medicare.DAL.Models.csproj" />
+    <ProjectReference Include="..\Medicare.DAL.Storage\Medicare.DAL.Storage.csproj" />
+  </ItemGroup>
+
+</Project>

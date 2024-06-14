@@ -10,7 +10,7 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 function Home() {
     const user = useSelector((state) => state.auth);
 
-    if (!user.dayAppointmentsCount)
+    if (!user?.fullName)
         return <div className="spinner-grow home-spinner" role="status"></div>;
 
     const displayName =
@@ -24,19 +24,19 @@ function Home() {
                 color="#075985"
                 icon={<MdToday />}
                 title="Appointments today"
-                value={user?.dayAppointmentsCount.length}
+                value={user?.dayAppointmentsCount}
             />
             <Tile
                 color="#166534"
                 icon={<GrLinkNext />}
                 title="Appointments this week"
-                value={user?.weekAppointmentsCount.length}
+                value={user?.weekAppointmentsCount}
             />
             <Tile
                 color="#854D0E"
                 icon={<TiTickOutline />}
                 title="Total appointments number"
-                value={user?.allAppoinementsCount}
+                value={user?.allAppointmentsCount}
             />
             <Tile
                 color="#3730A3"
@@ -46,7 +46,7 @@ function Home() {
                         ? "Different doctors contacted"
                         : "Different patients treated"
                 }
-                value={user?.differentDoctorsOrUsersCount}
+                value={user?.usersCount}
             />
         </div>
     );

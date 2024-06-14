@@ -166,7 +166,6 @@ function Appointment() {
         async (time) => {
             try {
                 await makeAppointment({
-                    id: "00000000-0000-0000-0000-000000000000",
                     date: pickedDate,
                     time,
                     isShort: isShort.current.checked,

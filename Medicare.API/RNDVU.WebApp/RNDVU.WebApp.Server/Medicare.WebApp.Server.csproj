@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Medicare.BLL.Interfaces\Medicare.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Medicare.BLL.Managers\Medicare.BLL.Managers.csproj" />
     <ProjectReference Include="..\rndvu.webapp.client\medicare.webapp.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
@@ -24,11 +26,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Context\Enums\" />
   </ItemGroup>
 
 </Project>

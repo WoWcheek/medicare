@@ -16,13 +16,16 @@ namespace Medicare.WebApp.Server.Extensions
             opts.UseRoutePrefix(new RouteAttribute(prefix));
         }
     }
+
     public class RoutePrefixConvention : IApplicationModelConvention
     {
         private readonly AttributeRouteModel _routePrefix;
+
         public RoutePrefixConvention(IRouteTemplateProvider route)
         {
             _routePrefix = new AttributeRouteModel(route);
         }
+
         public void Apply(ApplicationModel application)
         {
             foreach (var selector in application.Controllers.SelectMany(c => c.Selectors))

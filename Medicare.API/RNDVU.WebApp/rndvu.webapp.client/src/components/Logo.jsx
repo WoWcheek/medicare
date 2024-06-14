@@ -24,15 +24,6 @@ function Logo({ logoSize, fontSize }) {
 
     return (
         <div style={flexCssStyle} className="logo-container">
-            {/* <img
-                src={
-                    isDark
-                        ? "src/assets/images/logo-light.png"
-                        : "src/assets/images/logo-dark.png"
-                }
-                alt="medicare logo"
-                height={logoSize || 50}
-            /> */}
             <div className="img-div" style={imgCssStyle}></div>
             <h1 style={h1CssStyle}>MediCare</h1>
         </div>

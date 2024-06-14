@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
     --main-color: #3e36b0;
     --bg-color: #fff;
@@ -24,13 +31,6 @@ body.dark {
     }
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-
 .MuiButton-contained {
     background-color: var(--main-color) !important;
 }
@@ -40,16 +40,21 @@ body.dark {
     border-color: var(--main-color) !important;
 }
 
-.MuiInput-root::after {
-    border-bottom-color: var(--main-color) !important;
-}
-
 .MuiInputBase-input {
     color: var(--main-text-color) !important;
 }
 
+.MuiInput-underline::before {
+    border-bottom-color: var(--main-text-color) !important;
+    opacity: 0.6 !important;
+}
+
 .MuiRadio-root {
-    color: #fff !important;
+    color: var(--main-text-color) !important;
+}
+
+.MuiRadioGroup-root label {
+    opacity: 1 !important;
 }
 
 .Mui-checked {
@@ -81,24 +86,7 @@ button:has(svg) {
 
 input:-webkit-autofill {
     -webkit-background-clip: text;
-    color: var(--main-text-color) !important;
-}
-
-.rounded-3 {
-    border-radius: 0.3rem !important;
-}
-
-.social-icon-style2 {
-    margin-bottom: 0;
-    display: inline-block;
-    padding-left: 10px;
-    list-style: none;
-}
-
-.social-icon-style2 li {
-    vertical-align: middle;
-    display: inline-block;
-    margin-right: 5px;
+    -webkit-text-fill-color: var(--main-text-color);
 }
 
 a,
@@ -118,7 +106,6 @@ a:focus {
     -o-transition-duration: 0.2s;
 }
 
-.mb-1-6,
-.my-1-6 {
+.mb-1-6 {
     margin-bottom: 1.6rem;
 }

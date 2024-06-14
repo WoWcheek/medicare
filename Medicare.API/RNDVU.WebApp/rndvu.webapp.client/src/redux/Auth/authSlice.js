@@ -17,24 +17,10 @@ export const authSlice = createSlice({
             ...state,
             token: action.payload.token
         }),
-        logout: (state, action) => initialState,
-        setAuthStepsModel: (state, action) => {
-            const stepIndex = action.payload.step - 1;
-            const stepModel = action.payload.model;
-            const currentStep = action.payload.currentStep;
-            const newState = {
-                ...state,
-                stepModel: [...state.stepModel],
-                currentStep
-            };
-            newState.stepModel[stepIndex] = stepModel;
-
-            return newState;
-        }
+        logout: () => initialState
     }
 });
 
-export const { setUser, refreshToken, setAuthStepsModel, logout } =
-    authSlice.actions;
+export const { setUser, refreshToken, logout } = authSlice.actions;
 
 export default authSlice.reducer;

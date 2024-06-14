@@ -1,8 +1,7 @@
-﻿using System.Security.Claims;
-using Medicare.WebApp.Server.Context;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using Medicare.BLL.Interfaces;
+using Medicare.BLL.DTO;
 
 namespace Medicare.WebApp.Server.Controllers
 {
@@ -12,22 +11,23 @@ namespace Medicare.WebApp.Server.Controllers
     [Route("[controller]/[action]")]
     public class CatalogController : ControllerBase
     {
-        private MedicareContext _context;
+        private readonly ICatalogManager _catalogManager;
 
-        public CatalogController(MedicareContext mediator)
+        public CatalogController(ICatalogManager catalogManager)
         {
-            _context = mediator;
+            _catalogManager = catalogManager;
         }
 
-        public async Task<IActionResult> GetInfo()
+        public IActionResult GetInfo()
         {
-            var specializations = _context.Specializations.ToList();
+            var specializations = _catalogManager.GetSpecializations();
 
-            return Ok(new
+            var specializationsDto = new SpecializationsDTO
             {
-                specializations 
-            });
-        }
+                Specializations = specializations
+            };
 
+            return Ok(specializationsDto);
+        }
     }
 }
